@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IBM Emotion Detector</title>
+</head>
+<body>
+
+<h1>IBM Emotion Detector</h1>
+
+<input id="textToAnalyze" type="text" placeholder="Enter text here">
+<button onclick="RunSentimentAnalysis()">Analyze</button>
+
+<div id="system_response"></div>
+
+<script>
+function RunSentimentAnalysis() {
+    const text = document.getElementById("textToAnalyze").value;
+
+    fetch("/emotionDetector?textToAnalyze=" + encodeURIComponent(text))
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("system_response").innerHTML = data;
+        })
+        .catch(err => {
+            document.getElementById("system_response").innerHTML = err;
+        });
+}
+</script>
+
+</body>
+</html>
